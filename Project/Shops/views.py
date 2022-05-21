@@ -38,4 +38,5 @@ class ShopViewSet(mixins.ListModelMixin,
         serializer.is_valid(raise_exception=True)
         shop_instance = self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
-        return Response({'shop_id': shop_instance.id}, status=status.HTTP_201_CREATED, headers=headers)
+        return Response({'shop_id': shop_instance.id},
+                        status=status.HTTP_201_CREATED, headers=headers)
