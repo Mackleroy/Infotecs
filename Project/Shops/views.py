@@ -18,7 +18,7 @@ class CityViewSet(mixins.ListModelMixin,
         """Returns list of city's streets"""
         city = self.get_object()  # throw 404 if city now found
         serialized_streets = StreetSerializer(city.streets.all(), many=True)
-        # we can't filter streets by 'city=pk', cuz pk may be unreal
+        # we can't filter streets by 'city=pk', because pk may be unreal
         return Response(data=serialized_streets.data, status=status.HTTP_200_OK)
 
 

@@ -6,13 +6,14 @@ from Shops.models import Shop, City, Street
 
 
 class Command(BaseCommand):
-    """Django command to prepare usual models like City and Street."""
+    """Django command to prepare usual models City, Street and Shop."""
 
     def handle(self, *args, **options):
         """Check if objects exist, if not, then create them."""
         is_db_full = Street.objects.exists() and \
-                     City.objects.exists() and \
-                     Shop.objects.exists()
+            City.objects.exists() and \
+            Shop.objects.exists()
+
         if not is_db_full:
             cities = City.objects.bulk_create([
                 City(name='Moscow'),
@@ -30,7 +31,7 @@ class Command(BaseCommand):
 
             streets = Street.objects.bulk_create(street_list)
 
-            time_sample = datetime.today().time().replace(
+            time_sample = datetime.now().time().replace(
                 minute=0, second=0, microsecond=0)
 
             Shop.objects.bulk_create([
