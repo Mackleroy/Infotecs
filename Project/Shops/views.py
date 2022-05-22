@@ -31,9 +31,11 @@ class ShopViewSet(mixins.ListModelMixin,
     filter_backends = [ShopCustomFilter]
 
     def perform_create(self, serializer):
+        """Returns created object."""
         return serializer.save()
 
     def create(self, request, *args, **kwargs):
+        """Create object and return only ID of it except all data."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         shop_instance = self.perform_create(serializer)
