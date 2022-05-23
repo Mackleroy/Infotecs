@@ -22,7 +22,7 @@ class ShopCustomFilter(filters.BaseFilterBackend):
         if query_params.get('street'):
             q &= Q(street=query_params.get('street'))
         if query_params.get('city'):
-            q &= Q(city=query_params.get('city'))
+            q &= Q(street__city=query_params.get('city'))
 
         if open_state == OPENED_QUERY_PARAM_VALUE:
             q &= Q((
