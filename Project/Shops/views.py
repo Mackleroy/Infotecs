@@ -4,7 +4,8 @@ from rest_framework.response import Response
 
 from Shops.filters import ShopCustomFilter
 from Shops.models import City, Shop
-from Shops.serializers import CitySerializer, StreetSerializer, ShopSerializer
+from Shops.serializers import CitySerializer, StreetSerializer, \
+    ShopListSerializer, ShopCreateSerializer
 
 
 class CityViewSet(mixins.ListModelMixin,
@@ -26,13 +27,9 @@ class ShopViewSet(mixins.ListModelMixin,
                   mixins.CreateModelMixin,
                   viewsets.GenericViewSet):
 
-    queryset = Shop.objects.all()
-    serializer_class = ShopSerializer
+    queryset = Shop.objects.select_related('street__city').all()
+    serializer_class = ShopListSerializer
     filter_backends = [ShopCustomFilter]
-
-    def perform_create(self, serializer):
-        """Returns created object."""
-        return serializer.save()
 
     def create(self, request, *args, **kwargs):
         """Create object and return only ID of it except all data."""
@@ -42,3 +39,13 @@ class ShopViewSet(mixins.ListModelMixin,
         headers = self.get_success_headers(serializer.data)
         return Response({'shop_id': shop_instance.id},
                         status=status.HTTP_201_CREATED, headers=headers)
+
+    def perform_create(self, serializer):
+        """Returns created object."""
+        return serializer.save()
+
+    def get_serializer_class(self):
+        """Returns serializer class based on action create or basic list."""
+        if self.action == 'create':
+            return ShopCreateSerializer
+        return self.serializer_class

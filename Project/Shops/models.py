@@ -19,8 +19,6 @@ class Street(models.Model):
 
 class Shop(models.Model):
     name = models.CharField(max_length=255)
-    city = models.ForeignKey(City, related_name='shops',
-                             on_delete=models.CASCADE)
     street = models.ForeignKey(Street, related_name='shops',
                                on_delete=models.CASCADE)
     house = models.CharField(max_length=255)  # CharField for cases like "20k3"

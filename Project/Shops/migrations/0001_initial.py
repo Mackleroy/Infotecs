@@ -35,7 +35,6 @@ class Migration(migrations.Migration):
                 ('house', models.CharField(max_length=255)),
                 ('open_time', models.TimeField()),
                 ('close_time', models.TimeField()),
-                ('city', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='shops', to='Shops.city')),
                 ('street', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='shops', to='Shops.street')),
             ],
         ),

@@ -17,8 +17,18 @@ class StreetSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 
-class ShopSerializer(serializers.ModelSerializer):
+class ShopListSerializer(serializers.ModelSerializer):
+    street = serializers.CharField(source='street.name')
+    city = serializers.CharField(source='street.city.name')
 
     class Meta:
         model = Shop
-        fields = ['name', 'city', 'street', 'house', 'open_time', 'close_time']
+        fields = ['id', 'name', 'city', 'street',
+                  'house', 'open_time', 'close_time']
+
+
+class ShopCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Shop
+        fields = ['name', 'street', 'house', 'open_time', 'close_time']

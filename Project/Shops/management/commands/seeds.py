@@ -35,23 +35,23 @@ class Command(BaseCommand):
                 minute=0, second=0, microsecond=0)
 
             Shop.objects.bulk_create([
-                Shop(name='Morning_Shop', city=cities[0], street=streets[0],
-                     house='12k3', open_time=time_sample.replace(hour=5),
+                Shop(name='Morning_Shop', street=streets[0], house='12k3',
+                     open_time=time_sample.replace(hour=5),
                      close_time=time_sample.replace(hour=15)),
 
-                Shop(name='Day_Shop', city=cities[0], street=streets[1],
-                     house='12k4', open_time=time_sample.replace(hour=9),
+                Shop(name='Day_Shop', street=streets[1], house='12k4',
+                     open_time=time_sample.replace(hour=9),
                      close_time=time_sample.replace(hour=18)),
 
-                Shop(name='Evening_Shop', city=cities[1], street=streets[2],
-                     house='52', open_time=time_sample.replace(hour=19),
+                Shop(name='Evening_Shop', street=streets[2], house='52',
+                     open_time=time_sample.replace(hour=19),
                      close_time=time_sample.replace(hour=23)),
 
-                Shop(name='Night_Shop', city=cities[1], street=streets[3],
-                     house='75', open_time=time_sample.replace(hour=21),
+                Shop(name='Night_Shop', street=streets[3], house='75',
+                     open_time=time_sample.replace(hour=21),
                      close_time=time_sample.replace(hour=7)),
 
-                Shop(name='Tricky_Shop', city=cities[1], street=streets[3],
-                     house='75', open_time=time_sample.replace(hour=9),
+                Shop(name='Tricky_Shop', street=streets[3], house='75',
+                     open_time=time_sample.replace(hour=9),
                      close_time=time_sample.replace(hour=3)),
             ])
